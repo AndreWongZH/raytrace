@@ -1,14 +1,8 @@
-#ifndef HITTABLE_H
-#include "hittable.h"
-#endif
-
-#ifndef VEC3_H
-#include "vec3.h"
-#endif
-
-
 #ifndef SPHERE_H
 #define SPHERE_H
+
+#include "hittable.h"
+#include "rtweekend.h"
 
 class sphere : public hittable {
 public:
