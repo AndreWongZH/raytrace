@@ -1,3 +1,4 @@
+#include "rtweekend.h"
 #ifndef VEC3_H
 #include "vec3.h"
 #endif
@@ -7,12 +8,19 @@
 
 #include <iostream>
 
-void write_color(std::ostream &out, color pixel_color) {
-  int ir = static_cast<int>(255.99 * pixel_color.x());
-  int ig = static_cast<int>(255.99 * pixel_color.y());
-  int ib = static_cast<int>(255.99 * pixel_color.z());
+void write_color(std::ostream &out, color pixel_color, int samples_per_pixel) {
+  auto r = pixel_color.x();
+  auto g = pixel_color.y();
+  auto b = pixel_color.z();
 
-  out << ir << ' ' << ig << ' ' << ib << '\n';
+  auto scale = 1.0 / samples_per_pixel;
+  r *= scale;
+  g *= scale;
+  b *= scale;
+
+  out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
+      << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '
+      << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << '\n';
 }
 
 #endif
